@@ -7,8 +7,8 @@ services:
     autoDeploy: true
 
     # Render will build from your Dockerfile
-    dockerContext: .
-    dockerfilePath: ./Dockerfile
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
 
     envVars:
       - key: PORT
