@@ -1,0 +1,50 @@
+### Health Check
+GET http://localhost:8000/health
+
+### Ready Check
+GET http://localhost:8000/ready
+
+### Simulate Shopify Order Webhook (no HMAC)
+POST http://localhost:8000/webhooks/shopify/orders/create
+Content-Type: application/json
+X-Shopify-Hmac-Sha256: test
+
+{
+  "id": 12345,
+  "customer": {"first_name": "John", "last_name": "Doe"},
+  "total_price": "99.99"
+}
+
+### Simulate Razorpay Payment Webhook (no signature)
+POST http://localhost:8000/webhooks/payments/razorpay
+Content-Type: application/json
+X-Razorpay-Signature: test
+
+{
+  "id": "pay_123456",
+  "amount": 1000,
+  "currency": "INR",
+  "status": "captured"
+}
+
+### Simulate Shiprocket Shipment Update
+POST http://localhost:8000/webhooks/shiprocket/shipment-update
+Content-Type: application/json
+
+{
+  "awb": "SR123456789",
+  "status": "in_transit"
+}
+
+### Simulate WhatsApp Message Webhook
+POST http://localhost:8000/webhooks/whatsapp/messages
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "from": "919876543210",
+      "text": {"body": "Hello, world!"}
+    }
+  ]
+}

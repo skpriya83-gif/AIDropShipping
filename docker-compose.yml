@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  web:
+    build: ./backend
+    container_name: dropship_web
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - cache
+
+  db:
+    image: postgres:14
+    container_name: dropship_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dropship
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  cache:
+    image: redis:7
+    container_name: dropship_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
