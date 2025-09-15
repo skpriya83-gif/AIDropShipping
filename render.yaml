@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: dropship-fastapi
+    env: docker
+    plan: free   # or starter ($7/mo) if free tier is too limited
+    branch: main
+    autoDeploy: true
+
+    # Render will build from your Dockerfile
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: SHOPIFY_API_KEY
+        sync: false
+      - key: SHOPIFY_CREATE_WH_SECRET
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: NGROK_URL
+        sync: false
